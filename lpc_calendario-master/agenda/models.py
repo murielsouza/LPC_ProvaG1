@@ -4,7 +4,7 @@ from django import forms
 
 class Agenda(models.Model):
     nome = models.CharField(max_length=128)
-    usuario = models.ForeignKey(User)
+    usuario = models.ManyToManyField(User, blank=True, related_name='usuarios')
 
     TIPO_CHOICES = (
         ('Publica', 'Pública'),
@@ -28,6 +28,17 @@ class Compromisso(models.Model):
 
     def __str__(self):
         return self.nome + "( " + self.agenda.nome + " )"
+
+
+class Convite(models.Model):
+    anfitriao = models.ForeignKey(User, null=True, blank=False)
+    aceitar = models.BooleanField(default=False)
+    convidados = models.ManyToManyField(User, blank=True, related_name='convidados')
+    compromisso = models.ForeignKey(Compromisso, null=True, blank=False)
+
+    def __str__(self):
+        return self.anfitriao.username + " fez um convite para o evento " + self.compromisso.nome
+
 
 # Create your models here.
 
