@@ -32,3 +32,4 @@ Um usuário pode compartilhar suas agendas com outros usuários;
 Um usuário pode convidar os demais para um compromisso especifico;
 Os usuários convidados podem confirmar ou declinar na participação de um compromisso que foram convidados;
 
+# Uso de views, urls e models
