@@ -24,17 +24,17 @@ class Compromisso(models.Model):
     dataHora = models.DateTimeField(blank=True, null=True)
     local = models.CharField(max_length=60)
     notas = models.TextField()
-    agenda = models.ForeignKey(Agenda, null=True, blank=False) #rever
+    agenda = models.ForeignKey(Agenda, null=True, blank=False, on_delete=models.CASCADE) #rever
 
     def __str__(self):
         return self.nome + "( " + self.agenda.nome + " )"
 
 
 class Convite(models.Model):
-    anfitriao = models.ForeignKey(User, null=True, blank=False)
+    anfitriao = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE)
     aceitar = models.BooleanField(default=False)
     convidados = models.ManyToManyField(User, blank=True, related_name='convidados')
-    compromisso = models.ForeignKey(Compromisso, null=True, blank=False)
+    compromisso = models.ForeignKey(Compromisso, null=True, blank=False, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.anfitriao.username + " fez um convite para o evento " + self.compromisso.nome
