@@ -1,6 +1,9 @@
+from rest_framework import routers, serializers, viewsets
 from django.shortcuts import render
 from django.http import HttpResponse
 from agenda.models import *
+from agenda.serializers import *
+
 
 
 def todasAgendas(request):
@@ -23,6 +26,22 @@ def agendaInstitucional(request):
     for c in listaCompromissosInstitucionais:
         retorno += '<br> Nome Compromisso: {} <br> <br> '.format(c.nome)
     return HttpResponse(retorno)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class AgendaViewSet(viewsets.ModelViewSet):
+    queryset = Agenda.objects.all()
+    serializer_class = AgendaSerializer
+
+class CompromissoViewSet(viewsets.ModelViewSet):
+    queryset = Compromisso.objects.all()
+    serializer_class = CompromissoSerializer
+
+class ConviteViewSet(viewsets.ModelViewSet):
+    queryset = Convite.objects.all()
+    serializer_class = ConviteSerializer
 
 
 # Create your views here.
